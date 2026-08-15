@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "dgSpecHash": "NHGvRQCXITU=",
+  "success": true,
+  "projectFilePath": "D:\\Korp_Test_KaioHaniel\\backend\\StockService.Api\\StockService.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kaioh\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.9\\microsoft.aspnetcore.openapi.10.0.9.nupkg.sha512",
+    "C:\\Users\\kaioh\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "O pacote 'Microsoft.OpenApi' 2.0.0 tem uma alta vulnerabilidade de gravidade conhecida, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
+      "projectPath": "D:\\Korp_Test_KaioHaniel\\backend\\StockService.Api\\StockService.Api.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\Korp_Test_KaioHaniel\\backend\\StockService.Api\\StockService.Api.csproj",
+      "libraryId": "Microsoft.OpenApi",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}
