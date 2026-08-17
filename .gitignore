@@ -1,0 +1,56 @@
+## ===========================
+## .NET / C# Rules
+## ===========================
+[Bb]in/
+[Oo]bj/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+.vs/
+_ReSharper*/
+*.resharper
+*.DotSettings.user
+
+## ===========================
+## Entity Framework & SQL
+## ===========================
+*.db
+*.db-shm
+*.db-wal
+*.mdf
+*.ldf
+
+## ===========================
+## Node / Angular / Frontend
+## ===========================
+node_modules/
+dist/
+tmp/
+out-tsc/
+.angular/
+.npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+## ===========================
+## IDEs & Editors
+## ===========================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.DS_Store
+Thumbs.db
+
+## ===========================
+## Environment Variables
+## ===========================
+*.env
+*.env.*
+!*.env.example
