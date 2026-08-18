@@ -55,38 +55,38 @@ namespace StockService.Api.Controllers
         }
 
         [HttpPost("deduct-stock")]
-
         public async Task<IActionResult> DeductStock([FromBody] List<DeductStockItemDto> items)
         {
-            
+            Console.WriteLine($"[StockService] Recebida solicitação de baixa de estoque para {items?.Count ?? 0} itens.");
+
             if (items == null || !items.Any())
+                return BadRequest("Nenhum item informado.");
+
+            foreach (var item in items)
             {
-                return BadRequest("Nenhum item informado para baixa de estoque.");
+                Console.WriteLine($"[StockService] Validando item - ProductId: {item.ProductId}, Qtd: {item.Quantity}");
+                var product = await _context.Products.FindAsync(item.ProductId);
+                if (product == null)
+                    return BadRequest($"Produto com ID {item.ProductId} não encontrado.");
+
+                if (product.StockQuantity < item.Quantity)
+                    return BadRequest($"Saldo insuficiente para o produto '{product.Description}'. Disponível: {product.StockQuantity}, Solicitado: {item.Quantity}.");
             }
 
-            
             foreach (var item in items)
             {
                 var product = await _context.Products.FindAsync(item.ProductId);
-
-                if (product == null)
+                if (product != null)
                 {
-                    return NotFound($"Produto com ID {item.ProductId} não foi encontrado.");
+                    product.StockQuantity -= item.Quantity;
+                    Console.WriteLine($"[StockService] Novo saldo para {product.Description}: {product.StockQuantity}");
                 }
-
-                if (product.StockQuantity < item.Quantity)
-                {
-                    return BadRequest($"Saldo insuficiente para o produto '{product.Description}'. Saldo atual: {product.StockQuantity}, Solicitado: {item.Quantity}");
-                }
-
-                
-                product.StockQuantity -= item.Quantity;
             }
 
-            
             await _context.SaveChangesAsync();
+            Console.WriteLine("[StockService] Alterações salvas com sucesso no banco!");
 
-            return Ok(new { message = "Estoque atualizado com sucesso." });
+            return Ok();
         }
 
     }    

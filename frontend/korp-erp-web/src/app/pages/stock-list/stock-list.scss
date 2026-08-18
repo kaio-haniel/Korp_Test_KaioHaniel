@@ -1,0 +1,152 @@
+.card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.8rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  
+    .card-header h2 {
+      margin-top: 0;
+      font-size: 1.4rem;
+      color: #0f172a;
+    }
+  }
+  
+  .alert {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.2rem;
+    font-size: 0.9rem;
+  
+    &-error {
+      background-color: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #f87171;
+    }
+  
+    &-success {
+      background-color: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+  }
+  
+  .form-section {
+    margin-bottom: 1.5rem;
+  
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #334155;
+    }
+  
+    .product-form {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      flex-wrap: wrap;
+  
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        flex: 1;
+        min-width: 140px;
+  
+        &.flex-2 {
+          flex: 2;
+          min-width: 220px;
+        }
+  
+        label {
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: #475569;
+        }
+  
+        input {
+          padding: 0.6rem 0.8rem;
+          border: 1px solid #cbd5e1;
+          border-radius: 6px;
+          font-size: 0.95rem;
+  
+          &:focus {
+            outline: none;
+            border-color: #3b82f6;
+          }
+        }
+      }
+  
+      .form-action {
+        button {
+          padding: 0.65rem 1.4rem;
+          border: none;
+          border-radius: 6px;
+          background-color: #2563eb;
+          color: #fff;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.2s;
+  
+          &:hover {
+            background-color: #1d4ed8;
+          }
+        }
+      }
+    }
+  }
+  
+  hr {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 1.8rem 0;
+  }
+  
+  .table-section {
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #334155;
+    }
+  
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+  
+      th, td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid #f1f5f9;
+      }
+  
+      th {
+        background-color: #f8fafc;
+        font-weight: 600;
+        color: #475569;
+      }
+  
+      .text-right {
+        text-align: right;
+      }
+  
+      .badge {
+        display: inline-block;
+        padding: 0.25rem 0.6rem;
+        border-radius: 12px;
+        background-color: #e0f2fe;
+        color: #0369a1;
+        font-weight: 600;
+        font-size: 0.85rem;
+  
+        &-low {
+          background-color: #ffedd5;
+          color: #c2410c;
+        }
+      }
+    }
+  
+    .loading-text, .empty-text {
+      color: #64748b;
+      font-style: italic;
+    }
+  }

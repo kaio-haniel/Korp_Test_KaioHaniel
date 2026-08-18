@@ -52,12 +52,9 @@ namespace InvoiceService.Api.Controllers
             var nextnumber = lastnumber + 1;
 
             Invoice invoice = new();
-
             invoice.Number = nextnumber;
-
             invoice.Status = InvoiceStatus.Open;
-
-            invoice.CreateAt = DateTime.UtcNow;
+            invoice.createAt = DateTime.UtcNow;
 
             invoice.Items = dto.Items.Select(item => new InvoiceItem
             {
@@ -69,18 +66,16 @@ namespace InvoiceService.Api.Controllers
 
             _context.Invoices.Add(invoice);
             await _context.SaveChangesAsync();
+
             return CreatedAtAction(nameof(GetInvoiceById), new { id = invoice.Id }, invoice);
-
-
         }
 
         [HttpPost("{id}/close")]
-
         public async Task<ActionResult<Invoice>> CloseInvoice(int id)
         {
             var invoice = await _context.Invoices
-            .Include(i => i.Items)
-            .FirstOrDefaultAsync(i => i.Id == id);
+                .Include(i => i.Items)
+                .FirstOrDefaultAsync(i => i.Id == id);
 
             if (invoice == null)
             {
@@ -106,11 +101,9 @@ namespace InvoiceService.Api.Controllers
             }
 
             invoice.Status = InvoiceStatus.Closed;
-
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Nota fiscal fechada e impressa com sucesso!", invoice });
-
         }
         
 

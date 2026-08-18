@@ -13,7 +13,7 @@ public class Invoice
     [Required]
     public InvoiceStatus Status { get; set; } = InvoiceStatus.Open;
 
-    public DateTime CreateAt { get; set; } = DateTime.UtcNow;
+    public DateTime createAt { get; set; } = DateTime.UtcNow;
 
     public List<InvoiceItem> Items { get; set; } = new ();
 

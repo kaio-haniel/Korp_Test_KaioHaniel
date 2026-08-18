@@ -1,0 +1,75 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Controle de Estoque</h2>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="alert alert-error">{{ errorMessage() }}</div>
+  }
+  @if (successMessage()) {
+    <div class="alert alert-success">{{ successMessage() }}</div>
+  }
+
+
+  <section class="form-section">
+    <h3>Novo Produto</h3>
+    <form (ngSubmit)="onSubmit()" class="product-form">
+      <div class="form-group">
+        <label>Código</label>
+        <input type="text" [(ngModel)]="newProduct.code" name="code" placeholder="Ex: PROD-01" required />
+      </div>
+
+      <div class="form-group flex-2">
+        <label>Descrição</label>
+        <input type="text" [(ngModel)]="newProduct.description" name="description" placeholder="Ex: Teclado Mecânico" required />
+      </div>
+
+      <div class="form-group">
+        <label>Saldo Inicial</label>
+        <input type="number" [(ngModel)]="newProduct.stockQuantity" name="stockQuantity" min="0" required />
+      </div>
+
+      <div class="form-action">
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </div>
+    </form>
+  </section>
+
+  <hr />
+
+
+  <section class="table-section">
+    <h3>Produtos em Estoque</h3>
+
+    @if (isLoading()) {
+      <p class="loading-text">Carregando estoque...</p>
+    } @else if (products().length === 0) {
+      <p class="empty-text">Nenhum produto cadastrado até o momento.</p>
+    } @else {
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th class="text-right">Saldo em Estoque</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of products(); track product.id) {
+            <tr>
+              <td>#{{ product.id }}</td>
+              <td><strong>{{ product.code }}</strong></td>
+              <td>{{ product.description }}</td>
+              <td class="text-right">
+                <span class="badge" [class.badge-low]="product.stockQuantity <= 2">
+                  {{ product.stockQuantity }} un
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+</div>

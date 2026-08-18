@@ -1,0 +1,79 @@
+<div class="card">
+    <div class="card-header flex-between">
+      <h2>Emitir Nova Nota Fiscal</h2>
+      <a routerLink="/faturamento" class="btn btn-secondary">Voltar para Listagem</a>
+    </div>
+  
+    @if (errorMessage()) {
+      <div class="alert alert-error">{{ errorMessage() }}</div>
+    }
+  
+    <section class="item-builder">
+      <h3>Adicionar Produtos</h3>
+      <div class="builder-row">
+        <div class="form-group flex-2">
+          <label>Produto</label>
+          <select [(ngModel)]="selectedProductId" name="productSelect">
+            <option [ngValue]="null" disabled selected>Selecione um produto...</option>
+            @for (prod of products(); track prod.id) {
+              <option [ngValue]="prod.id">
+                {{ prod.code }} - {{ prod.description }} (Disponível: {{ prod.stockQuantity }} un)
+              </option>
+            }
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label>Quantidade</label>
+          <input type="number" [(ngModel)]="selectedQuantity" name="quantity" min="1" />
+        </div>
+  
+        <div class="form-action">
+          <button type="button" (click)="addItem()" class="btn btn-primary">+ Adicionar Item</button>
+        </div>
+      </div>
+    </section>
+  
+    <hr />
+  
+    <section class="items-summary">
+      <h3>Itens da Nota</h3>
+  
+      @if (items().length === 0) {
+        <p class="empty-text">Nenhum item adicionado ainda. Escolha um produto acima.</p>
+      } @else {
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Descrição</th>
+              <th class="text-right">Quantidade</th>
+              <th class="text-right">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of items(); track item.productId; let idx = $index) {
+              <tr>
+                <td><strong>{{ item.productCode }}</strong></td>
+                <td>{{ item.productDescription }}</td>
+                <td class="text-right">{{ item.quantity }} un</td>
+                <td class="text-right">
+                  <button type="button" (click)="removeItem(idx)" class="btn-remove">Remover</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </section>
+  
+    <div class="footer-actions">
+      <button 
+        type="button" 
+        (click)="saveInvoice()" 
+        class="btn btn-success" 
+        [disabled]="items().length === 0 || isSubmitting()">
+        {{ isSubmitting() ? 'Gerando Nota...' : 'Salvar Nota Fiscal' }}
+      </button>
+    </div>
+  </div>

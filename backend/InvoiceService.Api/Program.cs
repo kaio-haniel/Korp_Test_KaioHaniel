@@ -12,12 +12,13 @@ builder.Services.AddDbContext<InvoiceDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var stockServiceUrl = builder.Configuration.GetValue<string>("Services:StockServiceUrl") 
-                      ?? "https://localhost:7001";
+                      ?? "https://localhost:5001";
 
 builder.Services.AddHttpClient<IStockServiceClient, StockServiceClient>(client =>
 {
-    client.BaseAddress = new Uri(stockServiceUrl);
+    client.BaseAddress = new Uri("http://localhost:5001/");
 });
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
@@ -37,7 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseCors("AllowAngular");
 app.MapControllers();

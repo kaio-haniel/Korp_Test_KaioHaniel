@@ -1,0 +1,64 @@
+<div class="card">
+  <div class="card-header flex-between">
+    <h2>Faturamento & Notas Fiscais</h2>
+    <a routerLink="/faturamento/nova" class="btn btn-primary">+ Nova Nota Fiscal</a>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="alert alert-error">{{ errorMessage() }}</div>
+  }
+  @if (successMessage()) {
+    <div class="alert alert-success">{{ successMessage() }}</div>
+  }
+
+  <section class="table-section">
+    @if (isLoading()) {
+      <p class="loading-text">Carregando notas fiscais...</p>
+    } @else if (invoices().length === 0) {
+      <p class="empty-text">Nenhuma nota fiscal emitida até o momento.</p>
+    } @else {
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Data de Criação</th>
+            <th>Status</th>
+            <th>Itens</th>
+            <th class="text-right">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (invoice of invoices(); track invoice.id) {
+            <tr>
+              <td><strong>#{{ invoice.number }}</strong></td>
+              <td>{{ invoice.createAt | date:'dd/MM/yyyy HH:mm' }}</td>
+              <td>
+                @if (invoice.status === 0 || invoice.status === 'Open' || invoice.status === 'open') {
+                  <span class="status-badge status-open">Aberta</span>
+                } @else {
+                  <span class="status-badge status-closed">Fechada</span>
+                }
+              </td>
+              <td>
+                <ul class="items-list">
+                  @for (item of invoice.items; track item.id) {
+                    <li>{{ item.quantity }}x {{ item.productDescription }} ({{ item.productCode }})</li>
+                  }
+                </ul>
+              </td>
+              <td class="text-right">
+                @if (invoice.status === 0 || invoice.status === 'Open' || invoice.status === 'open') {
+                  <button type="button" (click)="onCloseInvoice(invoice)" class="btn btn-sm btn-success">
+                    Fechar Nota
+                  </button>
+                } @else {
+                  <span class="text-muted">Concluída</span>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+</div>

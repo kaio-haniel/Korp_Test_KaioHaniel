@@ -15,7 +15,7 @@ public class StockServiceClient : IStockServiceClient
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/products/deduct-stock", items);
+            var response = await _httpClient.PostAsJsonAsync("api/Products/deduct-stock", items);
 
             if (response.IsSuccessStatusCode)
             {
@@ -25,13 +25,9 @@ public class StockServiceClient : IStockServiceClient
             var errorContent = await response.Content.ReadAsStringAsync();
             return (false, string.IsNullOrWhiteSpace(errorContent) ? "Falha ao atualizar estoque." : errorContent);
         }
-        catch (HttpRequestException ex)
-        {
-            return (false, $"Não foi possível conectar ao serviço de estoque: {ex.Message}");
-        }
         catch (Exception ex)
         {
-            return (false, $"Erro inesperado na comunicação com o estoque: {ex.Message}");
+            return (false, $"Erro na comunicação com o estoque: {ex.Message}");
         }
     }
 }
