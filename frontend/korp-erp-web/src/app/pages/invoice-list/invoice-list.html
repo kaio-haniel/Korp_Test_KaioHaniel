@@ -47,7 +47,7 @@
                 </ul>
               </td>
               <td class="text-right">
-                @if (invoice.status === 0 || invoice.status === 'Open' || invoice.status === 'open') {
+                @if (invoice.status === 0 |){
                   <button type="button" (click)="onCloseInvoice(invoice)" class="btn btn-sm btn-success">
                     Fechar Nota
                   </button>
