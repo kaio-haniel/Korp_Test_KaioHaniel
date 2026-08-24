@@ -155,6 +155,3 @@ npm install
 ng serve
 Acesse a aplicação no navegador em: http://localhost:4200
 ```
-
-🎥 Demonstração em Vídeo
-Link do Vídeo: https://drive.google.com/file/d/1uDRgJrGWkPnUGWZOSd2FVYo9d1UJfuMU/view?usp=sharing
